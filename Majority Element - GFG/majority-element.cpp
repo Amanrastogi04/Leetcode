@@ -16,7 +16,9 @@ class Solution{
     int majorityElement(int a[], int size)
     {
         
-        int ans=a[0];
+        // moore's voting algo
+        
+         int ans=a[0];
         int cnt=0;
         for(int i=0;i<size;i++){
             if(a[i]==ans){
