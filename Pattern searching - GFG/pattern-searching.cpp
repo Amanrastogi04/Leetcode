@@ -19,13 +19,14 @@ bool searchPattern(string str, string pat)
     int m=pat.size();
     
     for(int i=0;i<=(n-m);i++){
-        int cnt=0;
+        bool flag=true;
         for(int j=0;j<m;j++){
-            if(str[i+j]==pat[j]){
-                cnt++;
+            if(str[i+j]!=pat[j]){
+                flag=false;
+                break;
             }
         }
-        if(cnt==m){
+        if(flag){
             return true;
         }
         
