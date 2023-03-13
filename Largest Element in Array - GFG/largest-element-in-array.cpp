@@ -12,12 +12,8 @@ class Solution
 public:
     int largest(vector<int> &arr, int n)
     {
-        int maxa=INT_MIN;
-        
-        for(int i=0;i<n;i++){
-            maxa=max(arr[i],maxa);
-        }
-        return maxa;
+        if(n==0) return arr[0];
+        return max(largest(arr,n-1),arr[n-1]);
     }
 };
 
