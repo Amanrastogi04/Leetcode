@@ -25,13 +25,12 @@ int main()
 
 int missingNumber(int A[], int N)
 {
-    int res=0;
+    int f=0;
     for(int i=0;i<N-1;i++){
-        res^=A[i];
+        f^=A[i];
     }
-    
     for(int i=0;i<=N;i++){
-        res^=i;
+        f^=i;
     }
-    return res;
+    return f;
 }
