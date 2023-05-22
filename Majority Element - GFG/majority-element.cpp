@@ -16,33 +16,18 @@ class Solution{
     int majorityElement(int a[], int size)
     {
         
-        // moore's voting algo
+        map<int,int> mp;
         
-         int ans=a[0];
-        int cnt=0;
         for(int i=0;i<size;i++){
-            if(a[i]==ans){
-                cnt++;
-            }
-            else{
-                cnt--;
-                if(cnt==0){
-                    ans=a[i];
-                    cnt=1;
-                }
+            mp[a[i]]++;
+        }
+        
+        for(auto it: mp){
+            if(it.second>size/2){
+                return it.first; 
             }
         }
         
-        cnt=0;
-        for(int i=0;i<size;i++){
-            if(ans==a[i]){
-                cnt++;
-            }
-        }
-        
-        if(cnt>size/2){
-            return ans;
-        }
         return -1;
         
     }
