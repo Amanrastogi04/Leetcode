@@ -12,7 +12,7 @@ class Solution{
     public:
     // Function to check if given number n is a power of two.
     bool isPowerofTwo(long long n){
-       if(n==0 || n==INT_MAX){
+       if(n==0 ){
            return false;
        }
        int cnt=0;
@@ -22,11 +22,11 @@ class Solution{
                cnt++;
            }
        }
-       if(cnt>1){
-           return false;
+       if(cnt<=1){
+           return true;
        }
        else{
-           return true;
+           return false;
        }
         
     }
