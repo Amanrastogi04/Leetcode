@@ -91,23 +91,19 @@ struct Node
 //Function to insert a new node at given position in doubly linked list.
 void addNode(Node *head, int pos, int data)
 {
-   
-   Node* curr=new Node(data);
-   Node* temp=head;
-   
-   int f=0;
-   
-   while(f<pos){
-       temp=temp->next;
-       f++;
-   }
-   
-   
-   curr->prev=temp;
-   curr->next=temp->next;
-   temp->next=curr;
-   
-   
-   
-   
+    Node* curr=new Node(data);
+    Node* temp=head;
+    
+    int f=0;
+    while(f<pos){
+        temp=temp->next;
+        f++;
+    }
+    
+    curr->prev=temp;
+    curr->next=temp->next;
+    temp->next=curr;
+    
+
+    
 }
