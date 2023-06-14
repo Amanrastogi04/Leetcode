@@ -34,20 +34,36 @@ class Solution{
     //Function to check whether the list is palindrome.
     bool isPalindrome(Node *head)
     {
-        Node* temp=head;
-        string v="";
-       
-        while(temp!=NULL){
-            v.push_back(temp->data);
-            temp=temp->next;
+        
+        Node* slow=head;
+        Node* fast=head;
+        
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
         }
         
-        for(int i=0;i<v.size()/2;i++){
-            if(v[i]!=v[v.size()-i-1]){
+        Node* prev=NULL;
+        Node* curr=slow;
+        Node* next=NULL;
+        
+        while(curr!=NULL){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        
+        while(head!=NULL && prev!=NULL){
+            if(head->data!=prev->data){
                 return false;
             }
+            head=head->next;
+            prev=prev->next;
         }
+        
         return true;
+        
     }
 };
 
