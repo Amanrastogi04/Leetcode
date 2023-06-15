@@ -80,25 +80,31 @@ struct Node
 // your task is to complete this function
 void sort(Node **head)
 {
-    Node* curr=*head;
-    vector<int> ans;
+    // Node* n1=*head;
+    // Node* n2=*head->next;
     
-    while(curr!=NULL){
-        ans.push_back(curr->data);
-        curr=curr->next;
-    }
+    // while(n2!=NULL){
+    //     if(n1.data>n2.data){
+    //         int t=n1.data;
+            
+    //     }
+    // }
     
-    sort(ans.begin(),ans.end());
+    Node *n1 = *head;
+        Node *n2 = (*head)->next;
+        while(n2!=NULL){
+            if(n1->data>n2->data){
+                int t=n1->data;
+                n1->data=n2->data;
+                n2->data=t;
+            } 
+                n2=n2->next;
+        if(n2==NULL){
+                n1=n1->next;
+                n2=n1->next;
+            }
+        }
+        // return head;
     
-    Node* temp=new Node(ans[0]);
-    Node* f=temp;
-    
-    for(int i=1;i<ans.size();i++){
-        Node*te=new Node(ans[i]);
-        f->next=te;
-        f=te;
-    }
-    
-    *head=temp;
-    
+
 }
