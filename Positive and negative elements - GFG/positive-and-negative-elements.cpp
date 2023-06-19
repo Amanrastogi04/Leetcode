@@ -11,18 +11,33 @@ class Solution{
     vector<int> arranged(int a[],int n)
     {
         vector<int> ans(n,0);
+  
         
-        for(int i=0,pos=0,neg=1;i<n;i++){
+        for(int i=0,e=0,o=1;i<n;i++){
             if(a[i]>0){
-                ans[pos]=a[i];
-                pos+=2;
+                ans[e]=a[i];
+                e+=2;
             }
             else{
-                ans[neg]=a[i];
-                neg+=2;
+                ans[o]=a[i];
+                o+=2;
             }
         }
         return ans;
+        
+        // vector<int> ans(n,0);
+        
+        // for(int i=0,pos=0,neg=1;i<n;i++){
+        //     if(a[i]>0){
+        //         ans[pos]=a[i];
+        //         pos+=2;
+        //     }
+        //     else{
+        //         ans[neg]=a[i];
+        //         neg+=2;
+        //     }
+        // }
+        // return ans;
     }
 };
 
