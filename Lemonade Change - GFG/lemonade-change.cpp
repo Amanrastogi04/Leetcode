@@ -7,33 +7,37 @@ using namespace std;
 class Solution {
   public:
     bool lemonadeChange(int N, vector<int> &bills) {
-        int five =0,ten=0;
         
-        for(auto it:bills){
-            if(it==5){
+        int five=0;
+        int ten=0;
+        
+        for(int i=0;i<N;i++){
+            
+            if(bills[i]==5){
                 five++;
             }
             
-            else if(it==10){
+            else if(bills[i]==10){
                 five--;
                 ten++;
             }
             
-            else{
-                ten--;
-                five--;
-                if(ten<0){
-                    ten=0;
-                    five-=2;
-                }
-                
-                
-            }
-            if(five<0){
-                    return false;
-                }
+           else{
+               ten--;
+               five--;
+               if(ten<0){
+                   ten=0;
+                   five-=2;
+               }
+           }
+           if(five<0){
+            return false;
+          }
         }
+        
+        
         return true;
+        
     }
 };
 
