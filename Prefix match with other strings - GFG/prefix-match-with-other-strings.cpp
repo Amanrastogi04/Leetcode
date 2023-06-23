@@ -11,24 +11,17 @@ class Solution{
 public:
     int klengthpref(string arr[], int n, int k, string str){    
         
-        int cnt=0;
-        string f="";
+        int ans=0;
         
-        for(int i=0;i<k;i++){
-            f+=str[i];
-        }
+        string comp (str.begin(),str.begin()+k);
         
         for(int i=0;i<n;i++){
-            string s="";
-            for(int j=0;j<k;j++){
-                s+=arr[i][j];
-            }
-            if(s==f){
-                cnt++;
-            }
+            string temp(arr[i].begin(),arr[i].begin()+k);
+            
+            if(temp==comp) ans++;
         }
         
-        return cnt;
+        return ans;
         
     }
 };
