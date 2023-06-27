@@ -5,16 +5,40 @@ using namespace std;
 // } Driver Code Ends
 vector<int> find(int arr[], int n , int x )
 {
-    int f=-1,l=-1;
+    int st=0,end=n-1,f=n,l=n;
     
-    for(int i=0;i<n;i++){
-        if(arr[i]==x){
-            if(f==-1) f=i;
-            l=i;
+    while(st<=end){
+        int mid=(st+end)/2;
+        
+        if(arr[mid]>=x){
+            f=mid;
+            end=mid-1;
+        }
+        else{
+            st=mid+1;
         }
     }
     
-    return {f,l};
+    st=0,end=n-1;
+    
+    while(st<=end){
+        int mid=(st+end)/2;
+        
+        if(arr[mid]>x){
+            l=mid;
+            end=mid-1;
+        }
+        else{
+            st=mid+1;
+        }
+        
+    }
+    
+    if(f==n || arr[f]!=x){
+        return {-1,-1};
+    }
+    
+    return {f,l-1};
 }
 
 //{ Driver Code Starts.
