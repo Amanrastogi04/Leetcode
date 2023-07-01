@@ -32,7 +32,7 @@ public:
             int mid=(st+end)/2;
             
             if(ischeck(stalls,k,mid)){
-        
+                ans=mid;
                 st=mid+1;
             }
             else{
@@ -41,7 +41,7 @@ public:
             }
         }
         
-        return end;
+        return ans;
         
     }
 };
