@@ -6,12 +6,10 @@ using namespace std;
 class Solution {
   public:
     int setBits(int N) {
-        
         int cnt=0;
-        for(int i=0;i<32;i++){
-            if(N&1<<i){
-                cnt++;
-            }
+        while(N){
+            N=N&(N-1);
+            cnt++;
         }
         return cnt;
     }
