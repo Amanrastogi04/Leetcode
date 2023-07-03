@@ -54,14 +54,13 @@ class Solution{
 public:
 
     void create_tree(node* root0, vector<int> &vec){
-        queue<node*>q;
+        queue<node*> q;
         q.push(root0);
         
         int i=1;
+        int j=vec.size();
         
-        int n=vec.size();
-        
-        while(i<n){
+        while(i<j){
             node* root=q.front();
             q.pop();
             
@@ -74,9 +73,8 @@ public:
             root->right=right;
             i++;
             q.push(right);
+            
         }
-        
-        
     }
 
 };
