@@ -10,18 +10,22 @@ using namespace std;
 class Solution{
   public:
     int countSubArrayProductLessThanK(const vector<int>& a, int n, long long k) {
-        long long r=0,l=0,ans=0;
-        long long prod=1;
+        int cnt=0;
+        long long pro=1;
+        int end=0;
         
-        for(;r<n;r++){
-            prod*=a[r];
-            for(;prod>=k && l<r;l++){
-                prod/=a[l];
-            }
+        for(int i=0;i<n;i++){
+            pro*=a[i];
             
-            if(prod<k)ans+=(r-l+1);
+            while(pro>=k && end<=i){
+                pro/=a[end];
+                end++;
+            }
+            cnt+=(i-end+1);
         }
-        return ans;
+        
+        return cnt;
+        
     }
 };
 
