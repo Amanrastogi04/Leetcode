@@ -94,24 +94,24 @@ struct Node
 class Solution {
   public:
     
-    int maxa=0;
     
-    int check(Node* root){
+    int check(Node* root,int &diam){
         if(root==NULL){
             return 0;
         }
         
-        int lh=check(root->left);
-        int rh=check(root->right);
-        maxa=max(maxa,lh+rh);
+        int lh=check(root->left,diam);
+        int rh=check(root->right,diam);
+        diam=max(diam,lh+rh);
         
         return 1+max(lh,rh);
     }
     
     int diameter(Node* root) {
-        check(root);
+        int diam=0;
+        check(root,diam);
         
-        return maxa+1;
+        return diam+1;
         
     }
 };
