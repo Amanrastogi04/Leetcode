@@ -103,36 +103,23 @@ class Solution{
     public:
     // return true/false denoting whether the tree is Symmetric or not
     
-    bool match(Node* root,Node* sroot){
-        if(root!=NULL && sroot!=NULL){
-            bool a=match(root->left,sroot->right);
-            bool b=match(root->right,sroot->left);
-            
-            if((root->data==sroot->data) && a && b){
-                return true;
-            }
-            else{
-                return false;
-            }
+    bool match(Node* root,Node*sroot){
+        if(root==NULL || sroot==NULL){
+            return root==sroot;
         }
         
-        else if(root==NULL && sroot==NULL){
-            return true;
-        }
-        
-        else{
-            return false;
-        }
+        return ((root->data==sroot->data)&& match(root->left,sroot->right) && match(root->right,sroot->left));
     }
-    
     
     
     bool isSymmetric(struct Node* root)
     {
-	    if(root==NULL)
-	    return true;
+	    if(root==NULL){
+	        return true;
+	    }
 	    
 	    return match(root->left,root->right);
+	    
     }
 };
 
