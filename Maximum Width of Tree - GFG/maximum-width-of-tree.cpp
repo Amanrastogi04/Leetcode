@@ -104,21 +104,19 @@ class Solution {
         queue<Node*> q;
         q.push(root);
         int cnt=0;
-        if(root==NULL){
-            return cnt;
-        }
         
         while(!q.empty()){
             int size=q.size();
-            cnt=max(cnt,size);
+            vector<int> ans;
             for(int i=0;i<size;i++){
                 Node* node=q.front();
                 q.pop();
-
+                ans.push_back(node->data);
                 if(node->left) q.push(node->left);
                 if(node->right) q.push(node->right);
             }
-
+            int f=ans.size();
+            cnt=max(cnt,f);
         }
         
         return cnt;
