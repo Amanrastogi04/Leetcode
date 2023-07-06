@@ -104,13 +104,8 @@ class Solution
     //from left to right in Binary Tree.
     vector<int> topView(Node *root)
     {
-        vector<int> ans;
-        
-        if(root==NULL)
-        return ans;
-        
-        map<int,int>m; //<line,node ki value>
-        queue<pair<Node*,int>> q; // <Node,line>
+        map<int,int>mp;
+        queue<pair<Node*,int>>q;
         q.push({root,0});
         
         while(!q.empty()){
@@ -118,25 +113,28 @@ class Solution
             q.pop();
             
             Node* node=it.first;
-            int line=it.second;
+            int level=it.second;
             
-            if(m.find(line)==m.end())
-            m[line]=node->data;
-            
-            if(node->left!=NULL){
-                q.push({node->left,line-1});
-                
-            }
-            if(node->right!=NULL){
-                q.push({node->right,line+1});
+            if(mp.find(level)==mp.end()){
+                mp[level]=node->data;
             }
             
+            if(node->left){
+                q.push({node->left,level-1});
+            }
+            if(node->right){
+                q.push({node->right,level+1});
+            }
         }
         
-        for(auto it:m){
+        vector<int> ans;
+        
+        for(auto it:mp){
             ans.push_back(it.second);
         }
+        
         return ans;
+        
     }
 
 };
