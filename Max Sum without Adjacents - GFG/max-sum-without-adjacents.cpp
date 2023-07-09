@@ -40,8 +40,27 @@ public:
 	
 	int findMaxSum(int *arr, int n) {
 	   // return solve(arr,n-1);
-	   vector<int> dp(n+1,-1);
-	   return solveMem(arr,n-1,dp);
+	   //vector<int> dp(n+1,-1);
+	   //return solveMem(arr,n-1,dp);
+	   
+	   
+	   
+	   int prev=arr[0];
+	   int prev1=0;
+	   
+	   
+	   for(int i=1;i<n;i++){
+	       int pick=arr[i];
+	       if(i>1)
+	       pick+=prev1;
+	       int notpick=prev;
+	       
+	       int curr=max(pick,notpick);
+	       prev1=prev;
+	       prev=curr;
+	   }
+	   
+	   return prev;
 	}
 };
 
