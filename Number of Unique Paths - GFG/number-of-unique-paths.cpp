@@ -54,25 +54,27 @@ class Solution
         // vector<vector<int>> dp(a,vector<int>(b,-1));
         // return solveMem(a-1,b-1,dp);
         
-        vector<vector<int>> dp(a,vector<int>(b,0));
+        vector<int> prev(b,0);
         
         for(int i=0;i<a;i++){
+             vector<int> temp(b,0);
             for(int j=0;j<b;j++){
-                if(i==0 && j==0) dp[i][j]=1;
+                if(i==0 && j==0) temp[j]=1;
                 else{
                     int up=0,left=0;
                     if(i>0){
-                        up=dp[i-1][j];
+                        up=prev[j];
                     }
                     if(j>0){
-                        left=dp[i][j-1];
+                        left=temp[j-1];
                     }
-                    dp[i][j]=up+left;
+                    temp[j]=up+left;
                 }
             }
+            prev=temp;
         }
         
-        return dp[a-1][b-1];
+        return prev[b-1];
         
     }
 };
