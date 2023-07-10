@@ -66,40 +66,41 @@ public:
         
         // return ans;
         
-        vector<vector<int>> dp(N,vector<int>(N,0));
+        vector<int> prev(N,0),curr(N,0);
         
         int ans=-1e8;
         for(int i=0;i<N;i++){
-            dp[0][i]=Matrix[0][i];
+            prev[i]=Matrix[0][i];
         }
             
             for(int j=1;j<N;j++){
                 for(int k=0;k<N;k++){
-                    int up=Matrix[j][k]+dp[j-1][k];
+                    int up=Matrix[j][k]+prev[k];
                     int left=Matrix[j][k],right=Matrix[j][k];
                     
                     if(k+1<N){
-                        right+=dp[j-1][k+1];
+                        right+=prev[k+1];
                     }
                     else{
                         right=-1e8;
                     }
                     
                     if(k-1>=0){
-                        left+=dp[j-1][k-1];
+                        left+=prev[k-1];
                     }
                     else{
                         left=-1e8;
                     }
                     
-                    dp[j][k]=max(up,max(left,right));
+                    curr[k]=max(up,max(left,right));
                 }
+                prev=curr;
             }
             
             int maxi=-1e8;
             
             for(int i=0;i<N;i++){
-                maxi=max(maxi,dp[N-1][i]);
+                maxi=max(maxi,prev[i]);
             }
             
             return maxi;
