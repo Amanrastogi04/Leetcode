@@ -58,13 +58,52 @@ public:
         
         // return ans;
         
-        vector<vector<int>> dp(N,vector<int>(N,-1));
+        // vector<vector<int>> dp(N,vector<int>(N,-1));
+        // int ans=-1e8;
+        // for(int i=0;i<N;i++){
+        //     ans=max(ans,solveMem(N-1,i,N,Matrix,dp));
+        // }
+        
+        // return ans;
+        
+        vector<vector<int>> dp(N,vector<int>(N,0));
+        
         int ans=-1e8;
         for(int i=0;i<N;i++){
-            ans=max(ans,solveMem(N-1,i,N,Matrix,dp));
+            dp[0][i]=Matrix[0][i];
         }
+            
+            for(int j=1;j<N;j++){
+                for(int k=0;k<N;k++){
+                    int up=Matrix[j][k]+dp[j-1][k];
+                    int left=Matrix[j][k],right=Matrix[j][k];
+                    
+                    if(k+1<N){
+                        right+=dp[j-1][k+1];
+                    }
+                    else{
+                        right=-1e8;
+                    }
+                    
+                    if(k-1>=0){
+                        left+=dp[j-1][k-1];
+                    }
+                    else{
+                        left=-1e8;
+                    }
+                    
+                    dp[j][k]=max(up,max(left,right));
+                }
+            }
+            
+            int maxi=-1e8;
+            
+            for(int i=0;i<N;i++){
+                maxi=max(maxi,dp[N-1][i]);
+            }
+            
+            return maxi;
         
-        return ans;
     }
 };
 
