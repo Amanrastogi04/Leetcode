@@ -57,30 +57,29 @@ public:
         // vector<vector<int>> dp(n,vector<int>(sum+1,-1));
         // return solveMem(n-1,sum,arr,dp);
         
-        vector<vector<bool>> dp(n,vector<bool>(sum+1,false));
+        vector<bool> prev(sum+1,false),curr(sum+1,false);
         
-        for(int i=0;i<n;i++){
-            dp[i][0]=true;
-        }
+        prev[0]=curr[0]=true;
         
         if(arr[0]<=sum){
-        dp[0][arr[0]]=true;
+        prev[arr[0]]=true;
         }
         
         for(int i=1;i<n;i++){
             for(int j=1;j<=sum;j++){
-                bool nottake=dp[i-1][j];
+                bool nottake=prev[j];
                 bool take=false;
                 
                 if(arr[i]<=j){
-                    take=dp[i-1][j-arr[i]];
+                    take=prev[j-arr[i]];
                 }
                 
-                dp[i][j]=take|nottake;
+                curr[j]=take|nottake;
             }
+            prev=curr;
         }
         
-        return dp[n-1][sum];
+        return prev[sum];
         
     }
 };
