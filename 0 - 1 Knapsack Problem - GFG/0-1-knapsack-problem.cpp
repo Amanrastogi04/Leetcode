@@ -49,10 +49,27 @@ class Solution
     { 
         //  return solve(n-1,W,wt,val);
         
-        vector<vector<int>> dp(n,vector<int>(W+1,-1));
-        return solveMem(n-1,W,wt,val,dp);
-    
-    
+        // vector<vector<int>> dp(n,vector<int>(W+1,-1));
+        // return solveMem(n-1,W,wt,val,dp);
+        
+        vector<vector<int>> dp(n,vector<int>(W+1,0));
+        
+        for(int i=wt[0];i<=W;i++) dp[0][i]=val[0];
+        
+        for(int i=1;i<n;i++){
+            for(int w=0;w<=W;w++){
+                int nottake=dp[i-1][w];
+                int take=INT_MIN;
+                if(wt[i]<=w){
+                    take=val[i]+dp[i-1][w-wt[i]];
+                }
+                
+                dp[i][w]=max(take,nottake);
+            }
+        }
+        
+        return dp[n-1][W];
+        
     }
 };
 
