@@ -52,23 +52,24 @@ class Solution
         // vector<vector<int>> dp(n,vector<int>(W+1,-1));
         // return solveMem(n-1,W,wt,val,dp);
         
-        vector<vector<int>> dp(n,vector<int>(W+1,0));
+        vector<int> prev(W+1,0),curr(W+1,0);
         
-        for(int i=wt[0];i<=W;i++) dp[0][i]=val[0];
+        for(int i=wt[0];i<=W;i++) prev[i]=val[0];
         
         for(int i=1;i<n;i++){
             for(int w=0;w<=W;w++){
-                int nottake=dp[i-1][w];
+                int nottake=prev[w];
                 int take=INT_MIN;
                 if(wt[i]<=w){
-                    take=val[i]+dp[i-1][w-wt[i]];
+                    take=val[i]+prev[w-wt[i]];
                 }
                 
-                dp[i][w]=max(take,nottake);
+                curr[w]=max(take,nottake);
             }
+            prev=curr;
         }
         
-        return dp[n-1][W];
+        return prev[W];
         
     }
 };
