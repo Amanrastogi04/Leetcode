@@ -11,7 +11,7 @@ class Solution{
 public:
     int knapSack(int N, int W, int val[], int wt[])
     {
-        vector<int>prev(W+1,0),curr(W+1,0);
+        vector<int>prev(W+1,0);
         
         for(int i=0;i<=W;i++){
             prev[i]=((int)(i/wt[0]))*val[0];
@@ -21,11 +21,10 @@ public:
             for(int j=0;j<=W;j++){
                 int nottake=prev[j];
                 int take=-1e8;
-                if(wt[i]<=j) take=val[i]+curr[j-wt[i]];
+                if(wt[i]<=j) take=val[i]+prev[j-wt[i]];
                 
-                curr[j]=max(take,nottake);
+                prev[j]=max(take,nottake);
             }
-            prev=curr;
         }
         
         return prev[W];
