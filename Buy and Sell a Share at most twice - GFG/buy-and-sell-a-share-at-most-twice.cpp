@@ -57,23 +57,25 @@ int maxProfit(vector<int>&price){
     // vector<vector<vector<int>>> dp(n,vector<vector<int>>(2,vector<int>(3,-1)));
     // return solveMem(0,1,price,2,dp);
     
-    vector<vector<vector<int>>> dp(n+1,vector<vector<int>>(2,vector<int>(3,0)));
+    vector<vector<int>> after(2,vector<int>(3,0));
+    vector<vector<int>> curr(2,vector<int>(3,0));
     
     for(int index=n-1;index>=0;index--){
         for(int buy=0;buy<=1;buy++){
             for(int cap=1;cap<=2;cap++){
                 if(buy==1){
-          dp[index][buy][cap]= max(-price[index]+dp[index+1][0][cap],dp[index+1][1][cap]);
+          curr[buy][cap]= max(-price[index]+after[0][cap],after[1][cap]);
         
     }
     else
        
-     dp[index][buy][cap]=max(price[index]+dp[index+1][1][cap-1],dp[index+1][0][cap]);
+     curr[buy][cap]=max(price[index]+after[1][cap-1],after[0][cap]);
             }
         }
+        after=curr;
     }
     
-    return dp[0][1][2];
+    return after[1][2];
     
 }
 
