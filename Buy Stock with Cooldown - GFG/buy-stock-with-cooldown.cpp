@@ -55,15 +55,13 @@ class Solution{
         vector<vector<long long>> dp(n+2,vector<long long>(2,0));
         
         for(int index=n-1;index>=0;index--){
-            for(int buy=0;buy<=1;buy++){
-                if(buy==1){
-            dp[index][buy]=max(-prices[index]+dp[index+1][0],dp[index+1][1]);
-        }
-        else{
+            
+            dp[index][1]=max(-prices[index]+dp[index+1][0],dp[index+1][1]);
+
         
-        dp[index][buy]=max(prices[index]+dp[index+2][1],dp[index+1][0]);
-        }
-            }
+        dp[index][0]=max(prices[index]+dp[index+2][1],dp[index+1][0]);
+    
+            
             
         }
         
