@@ -42,10 +42,29 @@ class Solution {
     }
     
     
-    int maxProfit(int K, int N, int A[]) {
+    int maxProfit(int K, int N, int a[]) {
         // return solve(0,1,K,N,A);
-        vector<vector<vector<int>>> dp(N,vector<vector<int>>(2,vector<int>(K+1,-1)));
-        return solveMem(0,1,K,N,A,dp);
+        // vector<vector<vector<int>>> dp(N,vector<vector<int>>(2,vector<int>(K+1,-1)));
+        // return solveMem(0,1,K,N,A,dp);
+        
+        vector<vector<vector<int>>> dp(N+1,vector<vector<int>>(2,vector<int>(K+1,0)));
+        
+        for(int index=N-1;index>=0;index--){
+            for(int buy=0;buy<=1;buy++){
+                for(int cap=1;cap<=K;cap++){
+                    if(buy==1){
+            dp[index][buy][cap]=
+            max(-a[index]+dp[index+1][0][cap],dp[index+1][1][cap]);
+        }
+        
+        else
+           dp[index][buy][cap]=
+           max(a[index]+dp[index+1][1][cap-1],dp[index+1][0][cap]);
+                }
+            }
+        }
+        
+        return dp[0][1][K];
     }
 };
 
