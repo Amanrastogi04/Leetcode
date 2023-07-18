@@ -47,24 +47,26 @@ class Solution {
         // vector<vector<vector<int>>> dp(N,vector<vector<int>>(2,vector<int>(K+1,-1)));
         // return solveMem(0,1,K,N,A,dp);
         
-        vector<vector<vector<int>>> dp(N+1,vector<vector<int>>(2,vector<int>(K+1,0)));
+        vector<vector<int>> after(2,vector<int>(K+1,0));
+        vector<vector<int>> curr(2,vector<int>(K+1,0));
         
         for(int index=N-1;index>=0;index--){
             for(int buy=0;buy<=1;buy++){
                 for(int cap=1;cap<=K;cap++){
                     if(buy==1){
-            dp[index][buy][cap]=
-            max(-a[index]+dp[index+1][0][cap],dp[index+1][1][cap]);
+            curr[buy][cap]=
+            max(-a[index]+after[0][cap],after[1][cap]);
         }
         
         else
-           dp[index][buy][cap]=
-           max(a[index]+dp[index+1][1][cap-1],dp[index+1][0][cap]);
+           curr[buy][cap]=
+           max(a[index]+after[1][cap-1],after[0][cap]);
                 }
             }
+            after=curr;
         }
         
-        return dp[0][1][K];
+        return after[1][K];
     }
 };
 
