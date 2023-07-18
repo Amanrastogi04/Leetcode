@@ -51,24 +51,25 @@ class Solution{
         // vector<vector<int>> dp(n,vector<int>(2,-1));
         // return solveMem(0,1,prices,dp);
         
-        vector<vector<long long>> dp(n+1,vector<long long>(2,0));
+        vector<long long> prev(2,0),curr(2,0);
         
-        dp[n][0]=dp[n][1]=0;
+        prev[0]=prev[1]=0;
         
         for(int i=n-1;i>=0;i--){
             for(int j=0;j<=1;j++){
                 long long profit=0;
                 if(j){
-                    profit=max(-prices[i]+dp[i+1][0],dp[i+1][1]);
+                    profit=max(-prices[i]+prev[0],prev[1]);
                 }
                 else{
-                    profit=max(prices[i]+dp[i+1][1],dp[i+1][0]);
+                    profit=max(prices[i]+prev[1],prev[0]);
                 }
-                dp[i][j]=profit;
+                curr[j]=profit;
             }
+            prev=curr;
         }
         
-        return dp[0][1];
+        return prev[1];
         
     }
 };
